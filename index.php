@@ -57,14 +57,14 @@ $parkFilter = $_GET["parking"];
 
 <body>
 
-<form action="filter.php" method="get">
-    <span>Filtra per parcheggio:</span>
-    <select name="parking" id="">
-        <option value="yes">si</option>
-        <option value="no">no</option>
-    </select>
-    <button type="submit">filtra</button>    
-</form>
+    <form action="" method="get">
+        <span>Filtra per parcheggio:</span>
+        <select name="parking" id="">
+            <option value="yes">si</option>
+            <option value="no">no</option>
+        </select>
+        <button type="submit">Cerca</button>
+    </form>
 
     <table class="table">
         <thead>
@@ -76,24 +76,46 @@ $parkFilter = $_GET["parking"];
                 <th scope="col">Distanza dal centro</th>
             </tr>
         </thead>
+
         <tbody>
 
 
-            <?php foreach ($hotels as $hotel): ?>
-                
-                <tr>
-                    <td scope="col"><?= $hotel['name'] ?></td>
-                    <td scope="col"><?= $hotel['description'] ?></td>
-                    <td scope="col"><?= $isParking = $hotel['parking'] == true ? 'si' : 'no' ?></td>
-                    <td scope="col"><?= $hotel['vote'] ?></td>
-                    <td scope="col"><?= $hotel['distance_to_center'] ?> Km</td>
 
-                </tr>
+            <?php if ($parkFilter == "no"): ?>
+                <?php foreach ($hotels as $hotel): ?>
+                    <tr>
+                        <td scope="col"><?= $hotel['name'] ?></td>
+                        <td scope="col"><?= $hotel['description'] ?></td>
+                        <td scope="col"><?= $isParking = $hotel['parking'] == true ? 'si' : 'no' ?></td>
+                        <td scope="col"><?= $hotel['vote'] ?></td>
+                        <td scope="col"><?= $hotel['distance_to_center'] ?> Km</td>
 
-            <?php endforeach; ?>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+
+
+            <?php if ($parkFilter == "yes"): ?>
+                <?php foreach ($hotels as $hotel): ?>
+                    <?php if ($hotel['parking'] == true): ?>
+                        <tr>
+                            <td scope="col"><?= $hotel['name'] ?></td>
+                            <td scope="col"><?= $hotel['description'] ?></td>
+                            <td scope="col"><?= $isParking = $hotel['parking'] == true ? 'si' : 'no' ?></td>
+                            <td scope="col"><?= $hotel['vote'] ?></td>
+                            <td scope="col"><?= $hotel['distance_to_center'] ?> Km</td>
+
+                        </tr>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+
+
+
         </tbody>
     </table>
 
 </body>
-
 </html>
