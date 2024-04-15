@@ -50,6 +50,26 @@
     <title>Document</title>
 </head>
 <body>
+
     
+    
+        <?php foreach ($hotels as $hotel) : ?>
+            <div>
+            <div>Nome: <?= $hotel['name'] ?></div>
+            <div>Descrizione: <?= $hotel['description'] ?></div>
+            <div>Parcheggio: <?= $isParking = $hotel['parking'] == true ? 'si' : 'no' ?></div>
+            <div>Voto: <?= $hotel['vote'] ?></div>
+            <div>Distanza dal centro: <?= $hotel['distance_to_center'] ?></div>
+
+
+            </div>
+        
+        
+
+        <?php endforeach; ?>
+
+   
+
+
 </body>
 </html>
