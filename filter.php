@@ -40,8 +40,6 @@ $hotels = [
 
 ];
 
-$parkFilter = $_GET["parking"];
-
 ?>
 
 <!DOCTYPE html>
@@ -57,15 +55,6 @@ $parkFilter = $_GET["parking"];
 
 <body>
 
-<form action="filter.php" method="get">
-    <span>Filtra per parcheggio:</span>
-    <select name="parking" id="">
-        <option value="yes">si</option>
-        <option value="no">no</option>
-    </select>
-    <button type="submit">filtra</button>    
-</form>
-
     <table class="table">
         <thead>
             <tr>
@@ -77,10 +66,8 @@ $parkFilter = $_GET["parking"];
             </tr>
         </thead>
         <tbody>
-
-
             <?php foreach ($hotels as $hotel): ?>
-                
+                <?php if ($hotel['parking'] == true) : ?>
                 <tr>
                     <td scope="col"><?= $hotel['name'] ?></td>
                     <td scope="col"><?= $hotel['description'] ?></td>
@@ -89,8 +76,9 @@ $parkFilter = $_GET["parking"];
                     <td scope="col"><?= $hotel['distance_to_center'] ?> Km</td>
 
                 </tr>
-
+                <?php endif; ?>
             <?php endforeach; ?>
+
         </tbody>
     </table>
 
